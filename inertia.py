@@ -42,9 +42,11 @@ def sample_sphere_polar(N, r=1):
     if N == 0:
         raise ValueError
     else:
-        for i in range(N):
-            phi = float(np.random.randint(0, 180) * (np.pi/180))  # [0, pi]
-            theta = float(np.random.randint(0, 360) * (np.pi/180))  # [0, 2*pi]
+        # for i in range(N):
+        #     phi = float(np.random.randint(0, 180) * (np.pi/180))  # [0, pi]
+        #     theta = float(np.random.randint(0, 360) * (np.pi/180))  # [0, 2*pi]
+            phi = (np.pi * np.random.random())
+            theta = (2 * np.pi * np.random.random())
             # Store each random points coordinates
             points[i] = (r * np.sin(phi) * np.cos(theta)), (r * np.sin(phi) * np.cos(theta)), (r * np.cos(phi))
             # Return Nx3 array of each random point
@@ -68,6 +70,7 @@ def sample_sphere_gaussian(N, r=1):
 
 
 def test_inertia_matrices_output():
+    np.set_printoptions(precision=3, suppress=True)
     m = 1
     r = 1
     n = 1000
@@ -88,21 +91,20 @@ def test_inertia_matrices_output():
                          [0, 0, (0.4 * m * r ** 2)]])
     print('Expected: ')
     print(expected)
-    np.set_printoptions(precision=3, suppress=True)
 
 
 # if __name__ == '__main__':
-#     print('-----Problem 1.1-----')
-#     print(compute_inertia_matrix([[1, 2, 3], [4, 5, 6]]))
+#     print('-----Problem 1.1: Compute Matrix-----')
+#     print(compute_inertia_matrix([[1, 1, 0], [-1, 1, 0]]))
 #
-#     print('-----Problem 1.2-----')
+#     print('-----Problem 1.2: Polar-----')
 #     print(sample_sphere_polar(2))
 #
-#     print('-----Problem 1.3-----')
+#     print('-----Problem 1.3: Gaussian-----')
 #     test_gauss = sample_sphere_gaussian(2)
 #     print(test_gauss)
 #     print('r[0] = ', np.linalg.norm(test_gauss[0]))
 #     print('r[1] =',  np.linalg.norm(test_gauss[1]))
 #
-#     print('-----Problem 1.4-----')
+#     print('-----Problem 1.4: Test Output-----')
 #     print(test_inertia_matrices_output())
