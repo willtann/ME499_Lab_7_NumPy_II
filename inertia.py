@@ -36,21 +36,23 @@ def sample_sphere_polar(N, r=1):
     :param r: Radius of sphere defaulting to 1
     :return: Random points on spheres surface
     """
-    # Array for holding output
-    points = np.reshape([None] * (3 * N), (N, 3))
-    # Generate random angles for each point to reference
     if N == 0:
         raise ValueError
     else:
+        # Array for holding output
+        a = np.array([None] * N)
+        points = np.reshape([None] * (3 * N), (N, 3))
         for i in range(N):
-            phi = float(np.random.randint(0, 180) * (np.pi/180))  # [0, pi]
-            theta = float(np.random.randint(0, 360) * (np.pi/180))  # [0, 2*pi]
-
+            # Generate random angles for each point to reference
+            phi = np.random.randint(0, 180) * (np.pi/180)  # [0, pi]
+            theta = np.random.randint(0, 360) * (np.pi/180)  # [0, 2*pi]
             # Store each random points coordinates
             points[i] = (float(r * np.sin(phi) * np.cos(theta)),
                          float(r * np.sin(phi) * np.cos(theta)),
                          float(r * np.cos(phi)))
-            # Return Nx3 array of each random point
+            # Make sure that the magnitude is within the radius
+            a[i] = r / np.linalg.norm(points[i])
+            points[i] = a[i] * points[i]
         return points
 
 
@@ -63,7 +65,6 @@ def sample_sphere_gaussian(N, r=1):
     """
     raw_samples = np.random.standard_normal(size=(N, 3))
     a = np.array([None] * N)
-    b = np.array([None] * N)
     for i in range(N):
         a[i] = r / np.linalg.norm(raw_samples[i])
         raw_samples[i] = a[i] * raw_samples[i]
@@ -77,7 +78,7 @@ def test_inertia_matrices_output():
     n = 1000
 
     """ Polar Interia Matrix"""
-    polar = compute_inertia_matrix(sample_sphere_polar(n))
+    polar = compute_inertia_matrix(np.array(sample_sphere_polar(n)))
     print('Polar: ')
     print(polar)
 
@@ -95,11 +96,11 @@ def test_inertia_matrices_output():
 
 
 # if __name__ == '__main__':
-    # print('-----Problem 1.1: Compute Matrix-----')
-    # print(compute_inertia_matrix([[1, 1, 0], [-1, 1, 0]]))
-
-    # print('-----Problem 1.2: Polar-----')
-    # print(sample_sphere_polar(2))
+#     print('-----Problem 1.1: Compute Matrix-----')
+#     print(compute_inertia_matrix([[1, 1, 0], [-1, 1, 0]]))
+#
+#     print('-----Problem 1.2: Polar-----')
+#     print(sample_sphere_polar(2))
 
     # print('-----Problem 1.3: Gaussian-----')
     # test_gauss = sample_sphere_gaussian(2)
