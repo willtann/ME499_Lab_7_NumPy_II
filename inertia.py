@@ -63,6 +63,7 @@ def sample_sphere_gaussian(N, r=1):
     raw_samples = np.random.standard_normal(size=(N, 3))
     a = np.array([None] * N)
     for i in range(N):
+        # Make sure that the magnitude is within the radius
         a[i] = r / np.linalg.norm(raw_samples[i])
         raw_samples[i] = a[i] * raw_samples[i]
     return raw_samples
@@ -82,9 +83,9 @@ def test_inertia_matrices_output():
     print('Gaussian: ')
     print(gauss)
     """ Expected Inertia matrix"""
-    expected = np.array([[(2/5 * m * r ** 2), 0, 0],
-                         [0, (2/5 * m * r ** 2), 0],
-                         [0, 0, (2/5 * m * r ** 2)]])
+    expected = np.array([[(7/5 * m * r ** 2), 0, 0],
+                         [0, (7/5 * m * r ** 2), 0],
+                         [0, 0, (7/5 * m * r ** 2)]])
     print('Expected: ')
     print(expected)
     return
@@ -92,16 +93,14 @@ def test_inertia_matrices_output():
 
 # if __name__ == '__main__':
 #     print('-----Problem 1.1: Compute Matrix-----')
-#     # print(compute_inertia_matrix([[1, 2, 3], [-1, 1, 0]]))
+#     print(compute_inertia_matrix([[1, 2, 3], [-1, 1, 0]]))
 #
 #     print('-----Problem 1.2: Polar-----')
 #     test_polar = sample_sphere_polar(2)
 #     print(test_polar)
-    # print(type(test_polar))
-    # print(type(test_polar[0, 0]))
-    # print('r[0] = ', np.linalg.norm(test_polar[0]))
-    # print('r[1] =', np.linalg.norm(test_polar[1]))
-
+#     print('r[0] = ', np.linalg.norm(test_polar[0]))
+#     print('r[1] =', np.linalg.norm(test_polar[1]))
+#
 #     print('-----Problem 1.3: Gaussian-----')
 #     test_gauss = sample_sphere_gaussian(2)
 #     print(test_gauss)
@@ -109,4 +108,4 @@ def test_inertia_matrices_output():
 #     print('r[1] =',  np.linalg.norm(test_gauss[1]))
 #
 #     print('-----Problem 1.4: Test Output-----')
-    # print(test_inertia_matrices_output())
+#     print(test_inertia_matrices_output())
