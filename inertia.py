@@ -64,7 +64,7 @@ def sample_sphere_gaussian(N, r=1):
     return raw_samples
 
 
-def sample_sphere_matrices_output():
+def test_inertia_matrices_output():
     np.set_printoptions(precision=3, suppress=True)
     m = 1
     r = 1
