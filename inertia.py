@@ -66,7 +66,7 @@ def sample_sphere_gaussian(N, r=1):
 
 def test_inertia_matrices_output():
     np.set_printoptions(precision=3, suppress=True)
-    m = 1
+    m = 0.5
     r = 1
     n = 1000
 
@@ -81,9 +81,9 @@ def test_inertia_matrices_output():
     print(gauss)
 
     """ Expected Inertia matrix"""
-    expected = np.array([[(0.5 * m * r ** 2), 0, 0],
-                         [0, (0.5 * m * r ** 2), 0],
-                         [0, 0, (0.5 * m * r ** 2)]])
+    expected = np.array([[(0.4 * m * r ** 2), 0, 0],
+                         [0, (0.4 * m * r ** 2), 0],
+                         [0, 0, (0.4 * m * r ** 2)]])
     print('Expected: ')
     print(expected)
 
