@@ -68,7 +68,6 @@ def sample_sphere_gaussian(N, r=1):
 
 
 def test_inertia_matrices_output():
-    np.set_printoptions(precision=3, suppress=True)
     m = 1
     r = 1
     n = 1000
@@ -89,6 +88,7 @@ def test_inertia_matrices_output():
                          [0, 0, (0.4 * m * r ** 2)]])
     print('Expected: ')
     print(expected)
+    np.set_printoptions(precision=3, suppress=True)
 
 
 # if __name__ == '__main__':
