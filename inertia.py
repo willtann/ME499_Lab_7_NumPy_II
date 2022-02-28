@@ -42,11 +42,12 @@ def sample_sphere_polar(N, r=1):
     if N == 0:
         raise ValueError
     else:
-        # for i in range(N):
+        for i in range(N):
         #     phi = float(np.random.randint(0, 180) * (np.pi/180))  # [0, pi]
         #     theta = float(np.random.randint(0, 360) * (np.pi/180))  # [0, 2*pi]
             phi = (np.pi * np.random.random())
             theta = (2 * np.pi * np.random.random())
+            print('phi, theta:', phi, theta)
             # Store each random points coordinates
             points[i] = (r * np.sin(phi) * np.cos(theta)), (r * np.sin(phi) * np.cos(theta)), (r * np.cos(phi))
             # Return Nx3 array of each random point
@@ -107,4 +108,4 @@ def test_inertia_matrices_output():
 #     print('r[1] =',  np.linalg.norm(test_gauss[1]))
 #
 #     print('-----Problem 1.4: Test Output-----')
-#     print(test_inertia_matrices_output())
+    # print(test_inertia_matrices_output())
