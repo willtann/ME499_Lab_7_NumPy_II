@@ -39,13 +39,16 @@ def sample_sphere_polar(N, r=1):
     # Array for holding output
     points = np.reshape([None] * (3 * N), (N, 3))
     # Generate random angles for each point to reference
-    for i in range(N):
-        phi = float(np.random.randint(0, 180) * (np.pi/180))  # [0, pi]
-        theta = float(np.random.randint(0, 360) * (np.pi/180))  # [0, 2*pi]
-        # Store each random points coordinates
-        points[i] = (r * np.sin(phi) * np.cos(theta)), (r * np.sin(phi) * np.cos(theta)), (r * np.cos(phi))
-        # Return Nx3 array of each random point
-    return points
+    if N == 0:
+        raise ValueError
+    else:
+        for i in range(N):
+            phi = float(np.random.randint(0, 180) * (np.pi/180))  # [0, pi]
+            theta = float(np.random.randint(0, 360) * (np.pi/180))  # [0, 2*pi]
+            # Store each random points coordinates
+            points[i] = (r * np.sin(phi) * np.cos(theta)), (r * np.sin(phi) * np.cos(theta)), (r * np.cos(phi))
+            # Return Nx3 array of each random point
+        return points
 
 
 def sample_sphere_gaussian(N, r=1):
@@ -66,7 +69,7 @@ def sample_sphere_gaussian(N, r=1):
 
 def test_inertia_matrices_output():
     np.set_printoptions(precision=3, suppress=True)
-    m = 0.5
+    m = 1
     r = 1
     n = 1000
 
