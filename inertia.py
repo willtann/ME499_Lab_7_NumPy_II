@@ -36,24 +36,22 @@ def sample_sphere_polar(N, r=1):
     :param r: Radius of sphere defaulting to 1
     :return: Random points on spheres surface
     """
-    if N == 0:
-        raise ValueError
-    else:
-        # Array for holding output
-        a = np.array([None] * N)
-        points = np.reshape([None] * (3 * N), (N, 3))
-        for i in range(N):
-            # Generate random angles for each point to reference
-            phi = np.random.randint(0, 180) * (np.pi/180)  # [0, pi]
-            theta = np.random.randint(0, 360) * (np.pi/180)  # [0, 2*pi]
-            # Store each random points coordinates
-            points[i] = (float(r * np.sin(phi) * np.cos(theta)),
-                         float(r * np.sin(phi) * np.sin(theta)),
-                         float(r * np.cos(phi)))
-            # Make sure that the magnitude is within the radius
-            a[i] = r / np.linalg.norm(points[i])
-            points[i] = a[i] * points[i]
-        return points
+    # Array for holding output
+    a = np.array([None] * N)
+    points = np.reshape([None] * (3 * N), (N, 3))
+    for i in range(N):
+        # Generate random angles for each point to reference
+        phi = np.random.randint(0, 180) * (np.pi/180)  # [0, pi]
+        theta = np.random.randint(0, 360) * (np.pi/180)  # [0, 2*pi]
+        # Store each random points coordinates
+        # points[i] = (float(r * np.sin(phi) * np.cos(theta)),
+        #              float(r * np.sin(phi) * np.sin(theta)),
+        #              float(r * np.cos(phi)))
+        points[i] = r * np.sin(phi) * np.cos(theta), r * np.sin(phi) * np.sin(theta), r * np.cos(phi)
+        # Make sure that the magnitude is within the radius
+        a[i] = r / np.linalg.norm(points[i])
+        points[i] = a[i] * points[i]
+    return points
 
 
 def sample_sphere_gaussian(N, r=1):
