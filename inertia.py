@@ -40,10 +40,12 @@ def sample_sphere_polar(N, r=1):
     points = np.reshape([None] * (3 * N), (N, 3))
     # Generate random angles for each point to reference
     for i in range(N):
-        phi = np.random.randint(0, 180) * (np.pi/180)  # [0, pi]
-        theta = np.random.randint(0, 360) * (np.pi/180)  # [0, 2*pi]
+        phi = float(np.random.randint(0, 180) * (np.pi/180))  # [0, pi]
+        theta = float(np.random.randint(0, 360) * (np.pi/180))  # [0, 2*pi]
+        print('phi', phi)
+        print('theta', theta)
         # Store each random points coordinates
-        points[i] = r * np.sin(phi) * np.cos(theta), r * np.sin(phi) * np.cos(theta), r * np.cos(phi)
+        points[i] = (r * np.sin(phi) * np.cos(theta)), (r * np.sin(phi) * np.cos(theta)), (r * np.cos(phi))
         # Return Nx3 array of each random point
     return points
 
@@ -88,18 +90,18 @@ def test_inertia_matrices_output():
     print(expected)
 
 
-# if __name__ == '__main__':
-#     print('-----Problem 1.1-----')
-#     print(compute_inertia_matrix([[1, 2, 3], [4, 5, 6]]))
-#
-#     print('-----Problem 1.2-----')
-#     print(sample_sphere_polar(2))
-#
-#     print('-----Problem 1.3-----')
-#     test_gauss = sample_sphere_gaussian(2)
-#     print(test_gauss)
-#     print('r[0] = ', np.linalg.norm(test_gauss[0]))
-#     print('r[1] =',  np.linalg.norm(test_gauss[1]))
-#
-#     print('-----Problem 1.4-----')
-#     print(sample_sphere_matrices_output())
+if __name__ == '__main__':
+    print('-----Problem 1.1-----')
+    print(compute_inertia_matrix([[1, 2, 3], [4, 5, 6]]))
+
+    print('-----Problem 1.2-----')
+    print(sample_sphere_polar(2))
+
+    print('-----Problem 1.3-----')
+    test_gauss = sample_sphere_gaussian(2)
+    print(test_gauss)
+    print('r[0] = ', np.linalg.norm(test_gauss[0]))
+    print('r[1] =',  np.linalg.norm(test_gauss[1]))
+
+    print('-----Problem 1.4-----')
+    print(test_inertia_matrices_output())
