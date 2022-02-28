@@ -48,7 +48,7 @@ def sample_sphere_polar(N, r=1):
             theta = np.random.randint(0, 360) * (np.pi/180)  # [0, 2*pi]
             # Store each random points coordinates
             points[i] = (float(r * np.sin(phi) * np.cos(theta)),
-                         float(r * np.sin(phi) * np.cos(theta)),
+                         float(r * np.sin(phi) * np.sin(theta)),
                          float(r * np.cos(phi)))
             # Make sure that the magnitude is within the radius
             a[i] = r / np.linalg.norm(points[i])
@@ -95,10 +95,13 @@ def test_inertia_matrices_output():
 
 # if __name__ == '__main__':
 #     print('-----Problem 1.1: Compute Matrix-----')
-#     print(compute_inertia_matrix([[1, 2, 3], [-1, 1, 0]]))
+#     # print(compute_inertia_matrix([[1, 2, 3], [-1, 1, 0]]))
 #
 #     print('-----Problem 1.2: Polar-----')
-#     print(sample_sphere_polar(2))
+#     test_polar = sample_sphere_polar(2)
+#     print(test_polar)
+#     print('r[0] = ', np.linalg.norm(test_polar[0]))
+#     print('r[1] =', np.linalg.norm(test_polar[1]))
 #
 #     print('-----Problem 1.3: Gaussian-----')
 #     test_gauss = sample_sphere_gaussian(2)
@@ -107,6 +110,4 @@ def test_inertia_matrices_output():
 #     print('r[1] =',  np.linalg.norm(test_gauss[1]))
 #
 #     print('-----Problem 1.4: Test Output-----')
-#     print(test_inertia_matrices_output())
-
-
+    # print(test_inertia_matrices_output())
