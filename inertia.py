@@ -60,8 +60,7 @@ def sample_sphere_gaussian(N, r=1):
     :param r: Radius of sphere defaulting to 1
     :return: Random points on spheres surface
     """
-
-
+    raw_samples = np.random.standard_normal(size=(N, 3))
     a = np.array([None] * N)
     for i in range(N):
         # Make sure that the magnitude is within the radius
