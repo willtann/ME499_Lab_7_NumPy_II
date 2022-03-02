@@ -29,9 +29,8 @@ def minimize_eggholder(guess, max_calls=100):
         mini = optimize.fmin(func=egg, x0=my_xy, maxfun=max_calls, full_output=True)
         # save results
         out.append((tuple(mini[0]), mini[1]))
-        return ((mini[0]), mini[1])
     # return 2 values... ((x, y), function_value)
-    # return np.array(out, dtype=object)
+        return np.array(out, dtype=object)
 
 
 if __name__ == '__main__':
