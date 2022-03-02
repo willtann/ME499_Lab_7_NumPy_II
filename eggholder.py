@@ -24,9 +24,6 @@ def minimize_eggholder(guess, max_calls=100):
         g = guess[i]
 
 
-
-
 if __name__ == '__main__':
     rand_points = np.random.randint(-512, 512, size=(1000, 2))
     test_min = minimize_eggholder(rand_points)
-
