@@ -1,6 +1,7 @@
+
 import numpy as np
 from scipy import optimize
-
+import matplotlib.pyplot as plt
 
 def eggholder(x, y):
     """
@@ -20,10 +21,36 @@ def eggholder(x, y):
 
 
 def minimize_eggholder(guess, max_calls=100):
-    for i, points in enumerate(guess):
-        g = guess[i]
+    minimized = [None] * len(guess)
+    egg = lambda xy: eggholder(xy[0], xy[1])
+    out = []
+    for g, my_xy in enumerate(guess):
+        mini = optimize.fmin(func=egg, x0=my_xy, maxfun=max_calls, full_output=True)
+        out.append((tuple(mini[0]), mini[1]))
+    return np.array(out, dtype=object)
 
 
 if __name__ == '__main__':
-    rand_points = np.random.randint(-512, 512, size=(1000, 2))
-    test_min = minimize_eggholder(rand_points)
+    guess = np.random.randint(-512, 512, size=(1000, 2))
+
+    # fmin
+    my_test = minimize_eggholder(guess)
+    f_min = my_test[:, 1]
+    # gmin
+    g_min = [None] * len(guess)
+    for i, loc in enumerate(guess):
+        global_min = eggholder(loc[0], loc[1])
+        # g_min.append(global_min)
+        g_min[i] = global_min
+    np.array(g_min).reshape((len(guess)), 1)
+
+    diff = np.abs(g_min, f_min)
+    # Plotting
+    plt.hist(diff, bins=25)
+    plt.title('Histogram: Absolute difference')
+    plt.ylabel('Frequency')
+    plt.xlabel('Absolute difference (fmin - global min)')
+    plt.show()
+
+
+
