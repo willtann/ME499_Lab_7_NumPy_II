@@ -83,9 +83,9 @@ def test_inertia_matrices_output():
     print('Gaussian: ')
     print(gauss)
     """ Expected Inertia matrix"""
-    expected = np.array([[(7/5 * m * r ** 2), 0, 0],
-                         [0, (7/5 * m * r ** 2), 0],
-                         [0, 0, (7/5 * m * r ** 2)]])
+    expected = np.array([[(2/3 * m * r ** 2), 0, 0],
+                         [0, (2/3 * m * r ** 2), 0],
+                         [0, 0, (2/3 * m * r ** 2)]])
     print('Expected: ')
     print(expected)
     return

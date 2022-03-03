@@ -21,16 +21,16 @@ def eggholder(x, y):
 
 
 def minimize_eggholder(guess, max_calls=100):
+    """
+    :param guess: scalar x, y array of any length and uses these to initialize an optimization function
+    :param max_calls: Maximum number of calls for optimization function
+    :return: settled on value of optimization function of same length as guess
+    """
     # function to optimize
     egg = lambda xy: eggholder(xy[0], xy[1])
-    out = []
-    for g, my_xy in enumerate(guess):
-        # optimize function with vaious guesses given by input
-        mini = optimize.fmin(func=egg, x0=my_xy, maxfun=max_calls, full_output=True)
-        # save results
-        out.append((tuple(mini[0]), mini[1]))
-    # return 2 values... ((x, y), function_value)
-    return np.array(out, dtype=object)
+    mini = optimize.fmin(func=egg, x0=guess, maxfun=max_calls, full_output=True)
+    # save results
+    return mini[0], mini[1]
 
 
 if __name__ == '__main__':
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     # fmin
     my_test = minimize_eggholder(guess)
     # function values from optimized function
-    f_min = my_test[:, 1]
+    f_min = my_test[1]
 
     # gmin
     g_min = [None] * len(guess)
